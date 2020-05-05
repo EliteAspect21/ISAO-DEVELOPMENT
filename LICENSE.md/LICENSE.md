@@ -1,6 +1,5 @@
-All rights reserved by the following parties
-
-KamikoAoi
-USDevs Network
-Rija.xyz
-EliteAspect21
+/* Copyright (C) The Isao Dev Team - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Backed by The USDevs Network (USDevs.net)
+ */
