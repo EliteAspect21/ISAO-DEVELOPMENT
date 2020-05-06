@@ -1,0 +1,23 @@
+{
+  "name": "quivia",
+  "version": "2.0.3",
+  "description": "A bot made for asking questions",
+  "main": "node index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "author": "Kamiko",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^6.0.1",
+    "canvas": "^2.6.1",
+    "discord.js": "^12.x.x",
+    "enmap": "^5.2.4",
+    "moment": "^2.25.3",
+    "moment-duration-format": "^2.3.2",
+    "node-fetch": "^2.6.0"
+  }
+}
