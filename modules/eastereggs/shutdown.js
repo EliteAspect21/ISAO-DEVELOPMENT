@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
   .setColor("#f2f8eb")
   .setTitle("Shutdown")
   .setAuthor("Easter Egg 6/9")
-  .setDescription("***Error 826*** \nMachine can not be powered down")
+  .setDescription("***Error 826*** \nQuantum Machine can not be powered down")
   .setThumbnail("https://cdn.iconscout.com/icon/free/png-256/shutdown-shut-close-power-off-switchoff-13202.png")
   .setTimestamp()
   .setFooter("Server Prefix: " + (client.guildStorage.get(guildKey, "prefix")) + " • © " + client.user.username, client.user.avatarURL());
