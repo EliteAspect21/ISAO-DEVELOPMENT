@@ -5,55 +5,18 @@ module.exports = async (client, message) => {
   
   // Ignore all bots and non-guilds
   if (!message.guild || message.author.bot) return;
-  const guildKey = `${message.guild.id}`;
 
-  if (message.guild) {
-    client.userStorage = new Enmap({ name: "userStorage", ensureProps: true});
-    const key = `${message.author.id}`;
-  
-    client.guildStorage.ensure(`${message.guild.id}`, {
-      prefix: "?",
-      announceChannel: "",
-      autorole: "none",
-      welcomeMessage: "",
-      welcomeChannel: "",
-    });
-  
-        // Triggers on new users we haven't seen before.
-    client.userStorage.ensure(`${message.author.id}`, {
-      user: message.author.id,
-      xp: 0,
-      level: 1,
-      atw: false,
-      brave: false,
-      edi: false,
-      nani: false,
-      online: false,
-      sd: false,
-      tp: false,
-      voi: false,
-      yeet: false,
-    });
-  
-    
-    client.userStorage.inc(key, "xp");
-    
-    // Calculate the user's current level
-    const curLevel = Math.floor(0.1 * Math.sqrt(client.userStorage.get(key, "xp")));
-    console.log(curLevel)
-    // Act upon level up by sending a message and updating the user's level in enmap.
-    if (client.userStorage.get(key, "level") < curLevel) {
-
-        const m = await message.channel.send(`You've leveled up to level **${curLevel}**! Soon this will be replaced with a image!`);
-      
-      client.userStorage.set(key, curLevel, "level");
-    }
+  let settings;
+  try {
+      settings = await client.getGuild(message.guild);
+  } catch (error) {
+      console.error(error);
   }
 
-  const prefix = (client.guildStorage.get(guildKey, "prefix"))
+  let prefix = (settings.prefix)
 
   // Ignore messages not starting with the prefix
-  if (message.content.indexOf(client.guildStorage.get(guildKey, "prefix")) !== 0)return
+  if (message.content.indexOf(settings.prefix) !== 0)return
 
   // Our standard argument/command name definition.
   const args = message.content
@@ -101,5 +64,5 @@ module.exports = async (client, message) => {
 
     if(cmd.data.category === "NSFW") return message.reply(responce[~~(Math.random()*responce.length)]);  }
   // Run the command
-  cmd.run(client, message, args);
+  cmd.run(client, message, args, settings);
 };

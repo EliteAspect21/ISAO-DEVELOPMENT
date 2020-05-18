@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, settings) => {
   const guildKey = `${message.guild.id}`;
 
   var parts = message.content.split(" ");
@@ -15,10 +15,10 @@ exports.run = async (client, message, args) => {
         title: "Help",
         description:
           "To get the list of commands, type `" +
-          (client.guildStorage.get(guildKey, "prefix")) +
+          (settings.prefix) +
           "cmds`." +
           "\n\nNeed help or support with a specific command? Use ```" +
-          (client.guildStorage.get(guildKey, "prefix")) +
+          (settings.prefix) +
           "help (Command)```",
         thumbnail: {
           url: client.user.displayAvatarURL
@@ -27,7 +27,7 @@ exports.run = async (client, message, args) => {
         footer: {
           icon_url: client.user.avatarURL(),
           text:
-            "Server Prefix: " + (client.guildStorage.get(guildKey, "prefix")) + " • © " + client.user.username
+            "Server Prefix: " + (settings.prefix) + " • © " + client.user.username
         }
       }
     });
@@ -52,7 +52,7 @@ exports.run = async (client, message, args) => {
           .addField("Aliases", "```" + val.data.aliases + "```", false)
           .setTimestamp()
           .setFooter(
-            "Server Prefix: " + (client.guildStorage.get(guildKey, "prefix")) + " • © " + client.user.username,
+            "Server Prefix: " + (settings.prefix) + " • © " + client.user.username,
             client.user.avatarURL()
           );
 
@@ -68,7 +68,7 @@ exports.run = async (client, message, args) => {
           .addField("Aliases", "```None```", false)
           .setTimestamp()
           .setFooter(
-            "Server Prefix: " + (client.guildStorage.get(guildKey, "prefix")) + " • © " + client.user.username,
+            "Server Prefix: " + (settings.prefix) + " • © " + client.user.username,
             client.user.avatarURL()
           );
 
@@ -79,9 +79,9 @@ exports.run = async (client, message, args) => {
   } else {
     return message.reply(
       "That is the incorrect useage of m!help \n Example : `" +
-      (client.guildStorage.get(guildKey, "prefix")) +
+      (settings.prefix) +
         "help` or `" +
-        (client.guildStorage.get(guildKey, "prefix")) +
+        (settings.prefix) +
         "help (Command)`"
     );
   }

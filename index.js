@@ -1,47 +1,15 @@
 const Enmap = require("enmap");
 const fs = require("fs");
 const modules = "./modules/";
-const Discord = require("discord.js");
 const config = require("./config.json");
-const client = new Discord.Client();
-
-client.on("ready", () => {
-  // This event will run if the bot starts, and logs in, successfully.
-  console.log(
-    `Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`
-  );
-  // Example of changing the bot's playing game to something useful. `client.user` is what the
-  // docs refer to as the "ClientUser".
-  client.user.setActivity(
-    `With ${client.users.cache.size} users!`
-  );
-});
+const { Client, Collection } = require('discord.js');
+const client = new Client();
+require('./utils/functions')(client);
+require('dotenv-flow').config();
 
 
-
-client.on('guildMemberAdd', member => {
-  // console.log('user' + member.username + ' joined the battle!');
-  const guildKey = `${member.guild.id}`;
-  let sayMessage = client.guildStorage.get(guildKey, "welcomeMessage")
-  var res = sayMessage.replace(/{users}/g, (member.guild.memberCount));
-  var res2 = res.replace(/{username}/g, (member.user.username));
-  var res3 = res2.replace(/{mention}/g, ("<@" + member.user.id + ">"));
-
-  client.channels.cache.get(client.guildStorage.get(guildKey, "welcomeChannel")).send(res3);
-
-  if ((client.guildStorage.get(guildKey, "autorole")) != "none") {
-
-      if (member.guild.roles.cache.find(r => r.name === (client.guildStorage.get(guildKey, "autorole"))) != undefined) {
-      var role = member.guild.roles.cache.find(r => r.name === (client.guildStorage.get(guildKey, "autorole")));
-      member.roles.add(role)
-      
-      }else {
-        console.log("Tried to give a role to a new user, but the role defined in settings is missing or removed, please run settings autorole (new role)")
-      }
-
-}
-});
-
+client.mongoose = require('./utils/mongoose');
+client.config = require('./config');
 
 
 client.login(config.token);
@@ -87,3 +55,4 @@ fs.readdirSync(modules).forEach(file => {
     });
   });
 });
+client.mongoose.init();
