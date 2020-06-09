@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 
 exports.run = async (client, message, args, settings) => {
-  const guildKey = `${message.guild.id}`;
 
   var parts = message.content.split(" ");
   if (parts.length == 1) {

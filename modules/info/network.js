@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 
-exports.run = async (client, message, args) => {
-  const guildKey = `${message.guild.id}`;
+exports.run = async (client, message, args, settings) => {
 
   let embed = new Discord.MessageEmbed()
   .setColor("#f2f8eb")
@@ -10,7 +9,7 @@ exports.run = async (client, message, args) => {
   .setThumbnail(client.user.avatarURL())
   .addField("Sites", `[Rija.xyz](https://Rija.xyz)\n[USDevs.net](https://USDevs.net)\n[Hrmm.Space](https://hrmm.space)` , false)
   .setTimestamp()
-  .setFooter("Server Prefix: " + (client.guildStorage.get(guildKey, "prefix")) + " • © " + client.user.username, client.user.avatarURL());
+  .setFooter("Server Prefix: " + (settings.prefix) + " • © " + client.user.username, client.user.avatarURL());
   
   message.channel.send(embed);}
 

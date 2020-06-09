@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 
-exports.run = async (client, message, args) => {
-  const guildKey = `${message.guild.id}`;
+exports.run = async (client, message, args, settings) => {
 
   let commandEmbed = new Discord.MessageEmbed()
 .setColor("#1ABC9C")
@@ -9,7 +8,7 @@ exports.run = async (client, message, args) => {
 // .setDescription("`[ ]` = required `ADMINISTRATOR` permission. \n<  > = Command is Dissabled. \n {  } = Guild owner only.")
 .setAuthor(client.user.username, client.user.avatarURL())
 .setTimestamp()
-.setFooter("Server Prefix: " + (client.guildStorage.get(guildKey, "prefix")) + " • © " + (client.user.username), client.user.avatarURL())
+.setFooter("Server Prefix: " + (settings.prefix) + " • © " + (client.user.username), client.user.avatarURL())
       
       let cmds = {}; 
     client.commands.forEach( ( val, key ) => {

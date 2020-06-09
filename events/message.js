@@ -13,7 +13,9 @@ module.exports = async (client, message) => {
       console.error(error);
   }
 
-  let prefix = (settings.prefix)
+  const prefix = (settings.prefix)
+
+  if (message.content == `<@!${client.user.id}>`) return message.reply(`My prefix is ${prefix}`)
 
   // Ignore messages not starting with the prefix
   if (message.content.indexOf(settings.prefix) !== 0)return

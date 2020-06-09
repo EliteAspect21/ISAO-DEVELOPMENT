@@ -1,10 +1,8 @@
 const Discord = require('discord.js');
 const moment = require("moment");
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, settings) => {
   require("moment-duration-format");
-
-  const guildKey = `${message.guild.id}`;
 
   let embed = new Discord.MessageEmbed()
   .setColor("#f2f8eb")
@@ -15,7 +13,7 @@ exports.run = async (client, message, args) => {
   .addField("Patreon", `[Click Here](https://www.patreon.com/IsaoDevs)` , false)
   .addField("Last Restarted", "Bot last restarted on " + moment(Date.now() - client.uptime).format('LLLL') , false)
   .setTimestamp()
-  .setFooter("Server Prefix: " + (client.guildStorage.get(guildKey, "prefix")) + " • © " + client.user.username, client.user.avatarURL());
+  .setFooter("Server Prefix: " + (settings.prefix) + " • © " + client.user.username, client.user.avatarURL());
   
   message.channel.send(embed);
 

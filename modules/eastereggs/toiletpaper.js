@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 
-exports.run = async (client, message, args) => {
-  const guildKey = `${message.guild.id}`;
+exports.run = async (client, message, args, settings) => {
 
   let embed = new Discord.MessageEmbed()
   .setColor("#f2f8eb")
@@ -10,7 +9,7 @@ exports.run = async (client, message, args) => {
   .setDescription("***Sorry, we are out of Toilet Paper***")
   .setThumbnail("https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/roll-of-paper.png")
   .setTimestamp()
-  .setFooter("Server Prefix: " + (client.guildStorage.get(guildKey, "prefix")) + " • © " + client.user.username, client.user.avatarURL());
+  .setFooter("Server Prefix: " + (settings.prefix) + " • © " + client.user.username, client.user.avatarURL());
   
   client.users.cache.get(message.author.id).send(embed);
   if ((client.userStorage.get(key, "tp")) == false) {

@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 
-exports.run = async (client, message, args) => {
-  const guildKey = `${message.guild.id}`;
+exports.run = async (client, message, args, settings) => {
 
   let embed = new Discord.MessageEmbed()
   .setColor("#f2f8eb")
@@ -11,7 +10,7 @@ exports.run = async (client, message, args) => {
   .setDescription('Welcome! We are creating the bot to rule Discord. Isao will be jam packed full of cool and amazing features, like Easter eggs, basic moderation, and server economy! By funding us, you will help Isao become the bot to rule the worl.. I mean, Discord!')
   .addField("Support Isao's Development", `[Patreon](https://www.patreon.com/IsaoDevs)` , false)
   .setTimestamp()
-  .setFooter("Server Prefix: " + (client.guildStorage.get(guildKey, "prefix")) + " • © " + client.user.username, client.user.avatarURL());
+  .setFooter("Server Prefix: " + (settings.prefix) + " • © " + client.user.username, client.user.avatarURL());
   
   message.channel.send(embed);
 }

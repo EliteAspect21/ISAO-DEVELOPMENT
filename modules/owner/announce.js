@@ -1,11 +1,9 @@
 
 exports.run = async (client, message, args) => {
-    const guildKey = `${message.guild.id}`;
 
     console.log(client.guildStorage.get(guildKey, "announceChannel"))
 
     if ((client.guildStorage.get(guildKey, "announceChannel")).length == 18) {
-    const guildKey = `${message.guild.id}`;
     const sayMessage = args.join(` `);
     message.delete().catch(O_o=>{});
     var res = sayMessage.replace(/{everyone}/g, "@everyone");

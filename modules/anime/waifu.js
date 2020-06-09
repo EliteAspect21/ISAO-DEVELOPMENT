@@ -2,8 +2,7 @@ const Discord = require('discord.js');
 const fetch = require("node-fetch");
 
 
-exports.run = async (client, message, args) => {
-    const guildKey = `${message.guild.id}`;
+exports.run = async (client, message, args, settings) => {
     let link;
 
     try {
@@ -18,7 +17,7 @@ exports.run = async (client, message, args) => {
     .setImage(link)
     .setTimestamp()
     .setFooter(
-      "Server Prefix: " + (client.guildStorage.get(guildKey, "prefix")) + " • © " + client.user.username,
+      "Server Prefix: " + (settings.prefix) + " • © " + client.user.username,
       client.user.avatarURL()
     );
 
